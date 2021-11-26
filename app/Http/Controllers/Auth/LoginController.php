@@ -83,25 +83,21 @@ class LoginController extends Controller
 
     public function redirectTo() {
 
+        $user = Auth::user();
         
-        // dd(Auth::guard());
-        // dd(Auth::guard('admin')->check());
-        // dd(Auth::guard('organizer')->check());
-        // dd(Auth::guard('web')->check());
-        // $user = Auth::user();
-        // if($user){
-        //         if(Auth::guard('organizer')->check() & !Auth::guard('admin')->check() &!Auth::guard('web')->check() )
-        //         {
-        //             return '/organizer';
-        //         }
-        //         elseif(!Auth::guard('organizer')->check() & Auth::guard('admin')->check() &!Auth::guard('web')->check())
-        //         {
-        //             return '/admin';
-        //         }
-        //         else{
-        //             return '/home';
-        //         }
-        // }
+        if($user){
+            if(Auth::guard('organizer')->check())
+            {
+                return '/organizer';
+            }
+            elseif(Auth::guard('admin')->check())
+            {
+                return '/admin';
+            }
+            else{
+                return '/home';
+            }
+        }
             
     }
 
